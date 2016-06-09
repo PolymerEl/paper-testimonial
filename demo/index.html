@@ -1,0 +1,83 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>paper-testimonial Demo</title>
+  <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../paper-testimonial.html">
+</head>
+
+<body unresolved>
+  <div class="vertical-section-container centered">
+    <h4>paper-testimonial</h4>
+    <p>Slide through a list of testimonials</p>
+    <demo-snippet class="centered-demo">
+      <template>
+        <template is="dom-bind" id="app">
+          <div style="width:300px; height: 500px; overflow-x:hidden; background:grey;">
+            <paper-testimonial id="testimonial"></paper-testimonial>
+          </div>
+        </template>
+      </template>
+    </demo-snippet>
+  </div>
+  <script>
+  window.addEventListener('WebComponentsReady', function() {
+    app = document.querySelector('#app');
+    //Do smth
+    app.$.testimonial.data = [{
+      name: 'Christophe Geiser',
+      quote: 'The best app Ever!',
+      position: 'e-Smile founder',
+      image: 'https://gitlab.com/uploads/user/avatar/510691/avatar.png',
+      social: {
+        'twitter': 'twitter',
+        'gplus': 'asdgh'
+      }
+    }, {
+      name: 'Bill',
+      quote: 'I wish we invented and used it',
+      position: 'Microsoft, something',
+      // image: 'http://assets.rollingstone.com/assets/images/story/20130718-bill-gates-624x420-1374261123.jpg',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Bill_Gates_June_2015.jpg/424px-Bill_Gates_June_2015.jpg',
+      social: {
+        'twitter': 'twitter',
+        'facebook': 'asdgh'
+      }
+    }, {
+      name: 'John Doew',
+      quote: 'I wish we invented and used it',
+      position: 'I am just a guy',
+      // image: 'http://assets.rollingstone.com/assets/images/story/20130718-bill-gates-624x420-1374261123.jpg',
+      social: {
+        'twitter': 'twitter',
+        'facebook': 'asdgh'
+      }
+    }, {
+      name: 'Jerry Nicholson',
+      quote: 'The best app Ever!',
+      position: 'Tindercapital, CEO',
+      image: 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/2/000/1a4/3db/2c36f11.jpg',
+      social: {
+        'twitter': 'twitter',
+        'facebook': 'asdgh'
+      }
+    }];
+  });
+  </script>
+</body>
+
+</html>

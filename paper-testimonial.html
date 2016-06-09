@@ -1,0 +1,292 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<!-- <link rel="import" href="../../bower_components/iron-icons/social-icons.html"> -->
+<link rel="import" href="../../bower_components/social-post-icons/social-post-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/editor-icons.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<!-- <link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html"> -->
+<!-- <link rel="import" href="../../bower_components/neon-animation/animations/slide-from-left-animation.html"> -->
+<!-- <link rel="import" href="../../bower_components/neon-animation/animations/slide-left-animation.html"> -->
+<!-- <link rel="import" href="../../bower_components/neon-animation/animations/slide-from-right-animation.html"> -->
+<!--
+An element providing a solution to no problem in particular.
+
+Example:
+
+    <paper-testimonial></paper-testimonial>
+
+Example:
+
+    <paper-testimonial>
+      <h2>Hello paper-testimonial</h2>
+    </paper-testimonial>
+
+@demo demo/index.html
+@hero hero.svg
+-->
+<dom-module id="paper-testimonial">
+  <template>
+    <style is="custom-style" include="iron-flex iron-flex-alignment"></style>
+    <style>
+    :host {
+      display: block;
+    }
+    
+    .ct {
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: row;
+    }
+    /*:before allows to somehow circumvent the position: absolute of neon-animated page issue ...*/
+    .ct:before {
+      content: "";
+      padding-top: 160%;
+    }
+
+    ::content .card-actions a {
+      color: inherit;
+    }
+    
+    ::content .card-actions iron-icon {
+      width: 40px;
+      height: 40px;
+    }
+    
+    ::content blockquote {
+      background: #f9f9f9;
+      border-left: 10px solid #ccc;
+      margin: 1.5em 10px;
+      padding: 0.5em 10px;
+    }
+    
+    ::content footer {
+      color: #444;
+    }
+    /*    ::content .quote-icon {
+      color: #ccc;
+      width: 32px;
+      height: 32px;
+     
+    }
+
+    ::content .flip {
+       -moz-transform: scaleX(-1);
+      -o-transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+    }*/
+    
+    paper-card {
+      width: 100%;
+      --paper-card-header: {
+        text-align: center;
+        overflow: inherit;
+        background: var(--primary-color);
+      }
+      ;
+      --paper-card-header-image: {
+        width: 40%;
+        /* max-width: 79px; */
+        margin: 20% auto -20%;
+        background: var(--accent-color);
+        border-radius: 50%;
+      }
+      ;
+      --paper-card-content: {
+        padding-top: 25%;
+      }
+      ;
+      --paper-card-actions: {
+        text-align: center;
+        font-size: 20px;
+        color: var(--accent-color);
+      }
+      /*@apply(--paper-card);*/
+    }
+
+    neon-animated-pages {
+      width: 100%;
+    }
+    
+    /*To allow a square image */
+    ::content .header iron-image:before {
+      content: "";
+      display: block;
+      padding-top: 100%;
+    }
+    
+    ::content .header img {
+      position: absolute;
+      margin: auto;
+      min-height: 100%;
+      min-width: 100%;
+      left: -100%;
+      right: -100%;
+      top: -100%;
+      bottom: -100%;
+    }
+    </style>
+    <div class="ct">
+      <neon-animated-pages on-tap="_onTap" id="neonPages" entry-animation="[[entryAnimation]]" exit-animation="[[exitAnimation]]" selected="[[selected]]">
+        <template is="dom-repeat" items="[[data]]">
+          <animatable>
+            <paper-card image="[[_getImage(item)]]" heading="[[item.heading]]" class$="[[item.class]]" elevation="[[elevation]]">
+              <!-- <paper-card heading="QUOTE" elevation="[[elevation]]"> -->
+              <div class="card-content">
+                <blockquote>
+                  <p class="quote">[[item.quote]]</p>
+                  <footer><span>—</span>
+                    <cite>
+                      <template is="dom-if" if=[[item.href]]>
+                        <a class="cite" href="[[item.href]]">[[item.name]]</a>
+                      </template>
+                      <template is="dom-if" if=[[!item.href]]>
+                        <span>[[item.name]]</span>
+                      </template>
+                      <template is="dom-if" if=[[item.position]]>
+                        <span class="position">, [[item.position]]</span>
+                      </template>
+                    </cite>
+                  </footer>
+                </blockquote>
+              </div>
+              <template is="dom-if" if=[[item.social]]>
+                <div class="card-actions">
+                  <template is="dom-repeat" items="[[toArray(item.social)]]" as="social">
+                    <a target="_blank" href="[[social.value]]"><iron-icon icon="social-post:[[social.key]]"></iron-icon></a>
+                  </template>
+                </div>
+              </template>
+            </paper-card>
+          </animatable>
+        </template>
+      </neon-animated-pages>
+  </template>
+  <script>
+  var nIntervId;
+
+  Polymer({
+    is: 'paper-testimonial',
+
+    properties: {
+      entryAnimation: {
+        type: String,
+        value: 'slide-from-right-animation'
+
+      },
+      exitAnimation: {
+        type: String,
+        value: 'slide-left-animation'
+      },
+      selected: {
+        type: Number,
+        value: 0
+      },
+      elevation: {
+        type: String,
+        value: 2
+      },
+      autoplay: {
+        type: Boolean,
+        value: false
+      },
+      duration: {
+        type: Number,
+        value: 8000
+      },
+      incrementOnTap: {
+        type: Boolean,
+        value: true
+      },
+      defaultImage: {
+        type: String,
+        // value: 'http://placehold.it/350x150/FFC107/000000'
+        value: 'quote-white.svg'
+      },
+      data: {
+        type: Array
+      }
+    },
+    observers: [
+      '_observerRepeat(duration, autoplay)'
+    ],
+    _getImage: function(item) {
+      return item.image || this.defaultImage;
+    },
+
+    toArray: function(obj) {
+      return Object.keys(obj).map(function(key) {
+        return {
+          key: key,
+          value: obj[key]
+        };
+      });
+    },
+
+    _observerRepeat: function(duration, autoplay) {
+      if (nIntervId) {
+        clearInterval(nIntervId);
+      }
+      if (autoplay && duration) {
+        nIntervId = setInterval(this.incrementSelection.bind(this), this.duration);
+      }
+
+    },
+
+    incrementSelection: function() {
+      this.selected = (this.selected + 1) % this.data.length;
+    },
+
+    _onTap: function(e) {
+      if (this.incrementOnTap) {
+        this.incrementSelection()
+      }
+
+    },
+
+    // Element Lifecycle
+
+    ready: function() {
+      // `ready` is called after all elements have been configured, but
+      // propagates bottom-up. This element's children are ready, but parents
+      // are not.
+      //
+      // This is the point where you should make modifications to the DOM (when
+      // necessary), or kick off any processes the element wants to perform.
+    },
+
+    attached: function() {
+      // `attached` fires once the element and its parents have been inserted
+      // into a document.
+      //
+      // This is a good place to perform any work related to your element's
+      // visual state or active behavior (measuring sizes, beginning animations,
+      // loading resources, etc).
+    },
+
+    detached: function() {
+      // The analog to `attached`, `detached` fires when the element has been
+      // removed from a document.
+      //
+      // Use this to clean up anything you did in `attached`.
+    },
+
+    // Element Behavior
+
+
+  });
+  </script>
+</dom-module>
