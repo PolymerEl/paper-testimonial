@@ -23,7 +23,7 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^1.5.0",
     "neon-animation": "PolymerElements/neon-animation#^1.2.3",
-    "paper-card": "PolymerElements/paper-card#^1.5",
+    "paper-card": "PolymerElements/paper-card#^1.1.1",
     "iron-icon": "PolymerElements/iron-icon#^1.0.8",
     "iron-icons": "PolymerElements/iron-icons#^1.0.8",
     "social-post-icons": "vanxrice/social-post-icons#^0.2.0",
