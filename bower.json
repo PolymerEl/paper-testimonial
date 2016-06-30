@@ -1,24 +1,34 @@
 {
   "name": "paper-testimonial",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "authors": [
-    "Anonymous <anonymous@example.com>"
+    "Christophe Geiser <christophe.geiser@gmail.com>"
   ],
-  "description": "An element providing a solution to no problem in particular.",
+  "description": "An element for displaying testimonials",
   "keywords": [
     "web-component",
     "polymer",
-    "seed"
+    "seed",
+    "testimonials",
+    "testimonial",
+    "material-design"
   ],
   "main": "paper-testimonial.html",
   "license": "http://polymer.github.io/LICENSE.txt",
-  "homepage": "https://github.com/<USERNAME>/paper-testimonial/",
+  "homepage": "https://github.com/polymerEl/paper-testimonial/",
   "ignore": [
     "/.*",
     "/test/"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.2.0"
+    "polymer": "Polymer/polymer#^1.5.0",
+    "neon-animation": "PolymerElements/neon-animation#^1.2.3",
+    "paper-card": "PolymerElements/paper-card#^1.5",
+    "iron-icon": "PolymerElements/iron-icon#^1.0.8",
+    "iron-icons": "PolymerElements/iron-icons#^1.0.8",
+    "social-post-icons": "vanxrice/social-post-icons#^0.2.0",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.3.1",
+    "iron-demo-helpers": "^1.0.0",
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
