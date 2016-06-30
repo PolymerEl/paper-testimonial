@@ -1,4 +1,4 @@
-[Demo and API docs](http://polymerel.github.io/paper-input-matrix/components/paper-input-matrix/#paper-input-matrix)
+[Demo and API docs](http://polymerel.github.io/paper-testimonial/components/paper-testimonial/#paper-testimonial)
 
 # paper-testimonial
 
