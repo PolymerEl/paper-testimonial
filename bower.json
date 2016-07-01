@@ -1,6 +1,6 @@
 {
   "name": "paper-testimonial",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "authors": [
     "Christophe Geiser <christophe.geiser@gmail.com>"
   ],
@@ -15,7 +15,7 @@
   ],
   "main": "paper-testimonial.html",
   "license": "http://polymer.github.io/LICENSE.txt",
-  "homepage": "https://github.com/polymerEl/paper-testimonial/",
+  "homepage": "https://github.com/polymerEl/paper-testimonial",
   "ignore": [
     "/.*",
     "/test/"
